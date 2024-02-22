@@ -9,6 +9,7 @@ fetch('data/Illinois_Obesity_By_County.geojson')
     .then(response => response.json())
     .then(geojsonData => {
         // Define a color scale for the choropleth map
+        //NEED TO IMPORT CHROMA.JS SAYS FUNNY ROBOT
         var colorScale = chroma.scale(['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']).domain([23, 37], 14, 'quantiles');
 
         L.geoJSON(geojsonData, {
