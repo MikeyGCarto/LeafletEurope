@@ -8,10 +8,25 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 fetch('data/Illinois_Obesity_By_County.geojson')
     .then(response => response.json())
     .then(geojsonData => {
+        // Define a color scale for the choropleth map
+        var colorScale = chroma.scale(['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']).domain([23, 37], 14, 'quantiles');
+
         L.geoJSON(geojsonData, {
-            onEachFeature: function(feature, layer) {
-                // Add interactivity - for example, open a popup when clicked
-                layer.bindPopup('<b>' + feature.properties.County + '</b><br>Obesity Percentage: ' + feature.properties.Percent_1 + '%');
+            // Style the county polygons based on the percentage of obesity
+            style: function (feature) {
+                var obesityPercent = feature.properties.Percent_1; // Assuming this property contains the percentage of obesity
+                return {
+                    fillColor: colorScale(obesityPercent).hex(), // Use the color scale to determine the fill color
+                    color: 'black',
+                    weight: 1,
+                    fillOpacity: 0.7
+                };
+            },
+            // Add interactivity - show county name and obesity percentage on hover
+            onEachFeature: function (feature, layer) {
+                var countyName = feature.properties.County;
+                var obesityPercent = feature.properties.Percent_1;
+                layer.bindTooltip('County: ' + countyName + '<br>Obesity Rate: ' + obesityPercent + '%');
             }
         }).addTo(map);
     })
