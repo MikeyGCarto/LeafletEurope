@@ -5,7 +5,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Load GeoJSON data
-fetch('data/Illinois_Obesity_By_County.geojson')
+fetch('Unit2/data/Illinois_Obesity_By_County.geojson')
     .then(response => response.json())
     .then(geojsonData => {
         L.geoJSON(geojsonData).addTo(map);
@@ -15,7 +15,7 @@ fetch('data/Illinois_Obesity_By_County.geojson')
     });
 
 // Parse CSV data and convert it to GeoJSON
-Papa.parse('data/Illinois_Obesity_By_County.csv', {
+Papa.parse('Unit2/data/Illinois_Obesity_By_County.csv', {
     header: true,
     download: true,
     dynamicTyping: true,
