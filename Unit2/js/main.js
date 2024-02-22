@@ -5,17 +5,22 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Load GeoJSON data
-fetch('Unit2/data/Illinois_Obesity_By_County.geojson')
+fetch('data/Illinois_Obesity_By_County.geojson')
     .then(response => response.json())
     .then(geojsonData => {
-        L.geoJSON(geojsonData).addTo(map);
+        L.geoJSON(geojsonData, {
+            onEachFeature: function(feature, layer) {
+                // Add interactivity - for example, open a popup when clicked
+                layer.bindPopup('<b>' + feature.properties.County + '</b><br>Obesity Percentage: ' + feature.properties.Percent_1 + '%');
+            }
+        }).addTo(map);
     })
     .catch(error => {
         console.error('Error loading GeoJSON data:', error);
     });
 
 // Parse CSV data and convert it to GeoJSON
-Papa.parse('Unit2/data/Illinois_Obesity_By_County.csv', {
+Papa.parse('data/Illinois_Obesity_By_County.csv', {
     header: true,
     download: true,
     dynamicTyping: true,
@@ -39,6 +44,11 @@ Papa.parse('Unit2/data/Illinois_Obesity_By_County.csv', {
         });
 
         // Create GeoJSON layer from CSV data
-        L.geoJSON(geojsonFeatures).addTo(map);
+        L.geoJSON(geojsonFeatures, {
+            onEachFeature: function(feature, layer) {
+                // Add interactivity - for example, open a popup when clicked
+                layer.bindPopup('<b>' + feature.properties.county + '</b><br>Obesity Percentage: ' + feature.properties.percent + '%');
+            }
+        }).addTo(map);
     }
 });
