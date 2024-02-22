@@ -1,19 +1,12 @@
-/* Leaflet Quick Start Guide and GeoJSON tutorials */
 
-//create Leaflet map object
-var map = L.map('map')
-	//set the map center at the given coordinates and zoom at level 13
-	.setView([51.505, -0.09], 13);
+var map = L.map('map').setView([51.505, -0.09], 13);
 
-//create Leaflet tileLayer to display map tiles, given tileset url and layer options
-var tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'northlandiguana.li83eogk',
     accessToken: 'pk.eyJ1Ijoibm9ydGhsYW5kaWd1YW5hIiwiYSI6IldJU1N4Y0UifQ.wpNgLPfnWQOBDWCgynJRiw'
-})
-	//add tileLayer to map
-	.addTo(map);
+}).addTo(map);
 
 //create Leaflet marker layer at given latlng coordinates
 var marker = L.marker([51.5, -0.09])
