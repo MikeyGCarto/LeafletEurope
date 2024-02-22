@@ -27,7 +27,7 @@
     }).addTo(map);
 
     // Load GeoJSON data
-    fetch('Illinois_Obesity_By_County.geojson')
+    fetch('Unit2/data/Illinois_Obesity_By_County.geojson')
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data).addTo(map);
