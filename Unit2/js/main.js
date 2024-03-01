@@ -68,3 +68,63 @@ Papa.parse('data/Illinois_Obesity_By_County.csv', {
         }).addTo(map);
     }
 });
+
+var map = L.map('map').setView([41.8781, -87.6298], 7); // Set initial map view to Chicago, IL
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Function to style popups
+function stylePopup(feature) {
+    return '<b>' + feature.properties.County + '</b><br>Obesity Percentage: ' + feature.properties.Percent_1 + '%';
+}
+
+// Load GeoJSON data
+fetch('data/Illinois_Obesity_By_County.geojson')
+    .then(response => response.json())
+    .then(geojsonData => {
+        L.geoJSON(geojsonData, {
+            onEachFeature: function(feature, layer) {
+                // Add interactivity - for example, open a styled popup when clicked
+                layer.bindPopup(stylePopup(feature));
+            }
+        }).addTo(map);
+    })
+    .catch(error => {
+        console.error('Error loading GeoJSON data:', error);
+    });
+
+// Parse CSV data and convert it to GeoJSON
+Papa.parse('data/Illinois_Obesity_By_County.csv', {
+    header: true,
+    download: true,
+    dynamicTyping: true,
+    complete: function(results) {
+        var csvData = results.data;
+
+        // Convert CSV data to GeoJSON format
+        var geojsonFeatures = csvData.map(row => {
+            return {
+                type: 'Feature',
+                properties: {
+                    // Add properties based on CSV columns
+                    county: row.County,
+                    percent: row.Percent_1
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [row.Longitude, row.Latitude] // Assuming Longitude and Latitude columns in CSV
+                }
+            };
+        });
+
+        // Create GeoJSON layer from CSV data
+        L.geoJSON(geojsonFeatures, {
+            onEachFeature: function(feature, layer) {
+                // Add interactivity - for example, open a styled popup when clicked
+                layer.bindPopup(stylePopup(feature));
+            }
+        }).addTo(map);
+    }
+});
