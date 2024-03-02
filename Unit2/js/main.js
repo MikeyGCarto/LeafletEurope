@@ -28,13 +28,13 @@ fetch('data/Illinois_Obesity_By_County.geojson')
                 var countyName = feature.properties.County;
                 var obesityPercent = feature.properties.Percent_1;
                 layer.bindTooltip('County: ' + countyName + '<br>Obesity Rate: ' + obesityPercent + '%');
-            }
-        }).addTo(map);
-    })
-    .catch(error => {
-        console.error('Error loading GeoJSON data:', error);
-    });
 
+                // Add click event listener to show CSV data in popup
+                layer.on('click', function () {
+                    // You can fetch and display the CSV data here
+                    // For demonstration purposes, I'll just display the county name
+                    layer.bindPopup('<b>County: ' + countyName + '</b>').openPopup();
+                    
 // Parse CSV data and convert it to GeoJSON
 Papa.parse('data/Illinois_Obesity_By_County.csv', {
     header: true,
