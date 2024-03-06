@@ -2,11 +2,11 @@ var map = L.map('map').setView([47.5000, 10.0000], 5);
 var data; // Define data in a broader scope
 
 // Add tile layer
-var Stadia_StamenTonerLite = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', {
-    minZoom: 0,
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    ext: 'png'
+var Jawg_Sunny = L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+	attribution: '<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	minZoom: 0,
+	maxZoom: 22,
+	accessToken: 'erBSxDSb3MaX7nh0bMwyVhfS0OQCK9Ewh7zEWXsLoGiF8Y4WUFrGuXLW8CftYEms'
 }).addTo(map);
 
 // Define a custom control for the slider and buttons
