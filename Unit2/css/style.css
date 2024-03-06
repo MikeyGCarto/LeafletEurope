@@ -1,0 +1,38 @@
+#map {
+    position: relative;
+    height: 720px;
+    width: 1280px;
+}
+
+/* Style for the buttons */
+#prev-year,
+#next-year {
+    position: absolute;
+    top: calc(100% + 115px); /* Adjust the distance below the slider bar */
+    width: 100px;
+    height: 30px; /* Adjust height as needed */
+    cursor: pointer;
+    background-color: #fff; /* Background color for the buttons */
+    border: 1px solid #000000; /* Border for the buttons */
+    border-radius: 5px; /* Border radius for rounded corners */
+    text-align: center; /* Center the text */
+    line-height: 30px; /* Center the text vertically */
+}
+
+/* Style for the icons */
+#prev-year i,
+#next-year i {
+    font-size: 12px; /* Adjust the size of the icons */
+    color: #b2182b; /* Color of the icons */
+}
+
+/* Style for the "Next Year" button */
+#next-year {
+    right: -510px; /* Adjust the horizontal position of the "Next Year" button */
+	bottom: 30px;
+}
+
+/* Style for the "Previous Year" button */
+#prev-year {
+    left: 310px; /* Adjust the horizontal position of the "Previous Year" button */
+}
