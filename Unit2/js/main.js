@@ -2,10 +2,7 @@ var map = L.map('map').setView([47.5000, 10.0000], 5);
 var data; // Define data in a broader scope
 
 // Add Tile Layer
-var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
+L.tileLayer.provider('Stadia.StamenTonerLite').addTo(map);
 
 // Define a custom control for the slider and buttons
 var SequenceControl = L.Control.extend({
