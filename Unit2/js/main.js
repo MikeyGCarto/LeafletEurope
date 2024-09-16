@@ -16,41 +16,46 @@ var SequenceControl = L.Control.extend({
     },
 
     onAdd: function (map) {
+        // Create the container for the slider and buttons
         var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 
-        // Add HTML elements for the slider and buttons with icons
-        container.innerHTML = '<input type="range" id="slider" min="2016" max="2023" value="2016" step="1" class="leaflet-bar-part leaflet-bar-part-single" />';
-            
+        // Add HTML elements for the slider and buttons
+        container.innerHTML = `
+            <input type="range" id="slider" min="2016" max="2023" value="2016" step="1" class="leaflet-bar-part leaflet-bar-part-single" />
+            <div id="buttons-container" style="margin-top: 10px; text-align: center;">
+                <button id="prev-year" class="leaflet-bar-part leaflet-bar-part-single" style="margin-right: 5px;">Previous</button>
+                <button id="next-year" class="leaflet-bar-part leaflet-bar-part-single">Next</button>
+            </div>`;
 
         // Prevent map panning when interacting with the control
         L.DomEvent.disableClickPropagation(container);
 
         // Add event listener for the slider
         container.querySelector('#slider').addEventListener('input', function() {
-            updateSymbols();
+            updateSymbols(); // Call your updateSymbols function when the slider moves
         });
 
-							// Add event listeners for the buttons
-			document.querySelector('#prev-year').addEventListener('click', function() {
-				var slider = document.querySelector('#slider');
-				if (parseInt(slider.value) > parseInt(slider.min)) {
-					slider.value = parseInt(slider.value) - 1;
-					updateSymbols();
-				}
-			});
+        // Add event listeners for the buttons
+        container.querySelector('#prev-year').addEventListener('click', function() {
+            var slider = container.querySelector('#slider');
+            if (parseInt(slider.value) > parseInt(slider.min)) {
+                slider.value = parseInt(slider.value) - 1;
+                updateSymbols();
+            }
+        });
 
-			document.querySelector('#next-year').addEventListener('click', function() {
-				var slider = document.querySelector('#slider');
-				if (parseInt(slider.value) < parseInt(slider.max)) {
-					slider.value = parseInt(slider.value) + 1;
-					updateSymbols();
-				}
-			});
-
+        container.querySelector('#next-year').addEventListener('click', function() {
+            var slider = container.querySelector('#slider');
+            if (parseInt(slider.value) < parseInt(slider.max)) {
+                slider.value = parseInt(slider.value) + 1;
+                updateSymbols();
+            }
+        });
 
         return container;
     }
 });
+
 
 // Create an instance of the SequenceControl
 var sequenceControl = new SequenceControl();
