@@ -16,8 +16,6 @@ var SequenceControl = L.Control.extend({
     },
 
     onAdd: function (map) {
-        // Create the container for the slider
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 
         // Prevent map panning when interacting with the control
         L.DomEvent.disableClickPropagation(container);
