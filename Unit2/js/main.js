@@ -19,9 +19,6 @@ var SequenceControl = L.Control.extend({
         // Create the container for the slider
         var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 
-        // Add HTML element for the slider
-        container.innerHTML = '<input type="range" id="slider" min="2016" max="2023" value="2016" step="1" class="leaflet-bar-part leaflet-bar-part-single" />';
-
         // Prevent map panning when interacting with the control
         L.DomEvent.disableClickPropagation(container);
 
