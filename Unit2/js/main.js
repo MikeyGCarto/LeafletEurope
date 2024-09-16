@@ -9,45 +9,33 @@ var Jawg_Sunny = L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png
 	accessToken: 'erBSxDSb3MaX7nh0bMwyVhfS0OQCK9Ewh7zEWXsLoGiF8Y4WUFrGuXLW8CftYEms'
 }).addTo(map);
 
-// Define a custom control for the slider and buttons
+// Define a custom control for the slider only (no buttons)
 var SequenceControl = L.Control.extend({
     options: {
         position: 'topleft' // Position the control at the top left
     },
 
     onAdd: function (map) {
-        // Create the container for the slider and buttons
+        // Create the container for the slider
         var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+        // Add HTML element for the slider
+        container.innerHTML = '<input type="range" id="slider" min="2016" max="2023" value="2016" step="1" class="leaflet-bar-part leaflet-bar-part-single" />';
 
         // Prevent map panning when interacting with the control
         L.DomEvent.disableClickPropagation(container);
 
-        // Add event listener for the slider
+        // Add event listener for the slider to update symbols on input change
         container.querySelector('#slider').addEventListener('input', function() {
             updateSymbols(); // Call your updateSymbols function when the slider moves
-        });
-
-        // Add event listeners for the buttons
-        container.querySelector('#prev-year').addEventListener('click', function() {
-            var slider = container.querySelector('#slider');
-            if (parseInt(slider.value) > parseInt(slider.min)) {
-                slider.value = parseInt(slider.value) - 1;
-                updateSymbols();
-            }
-        });
-
-        container.querySelector('#next-year').addEventListener('click', function() {
-            var slider = container.querySelector('#slider');
-            if (parseInt(slider.value) < parseInt(slider.max)) {
-                slider.value = parseInt(slider.value) + 1;
-                updateSymbols();
-            }
         });
 
         return container;
     }
 });
 
+// Now you can add this control to the map as usual
+map.addControl(new SequenceControl());
 
 // Create an instance of the SequenceControl
 var sequenceControl = new SequenceControl();
