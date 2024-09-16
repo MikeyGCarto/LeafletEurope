@@ -29,9 +29,6 @@ var SequenceControl = L.Control.extend({
     }
 });
 
-// Now you can add this control to the map as usual
-map.addControl(new SequenceControl());
-
 // Create an instance of the SequenceControl
 var sequenceControl = new SequenceControl();
 
