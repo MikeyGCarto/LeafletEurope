@@ -8,7 +8,7 @@
 #prev-year,
 #next-year {
     position: absolute;
-    top: calc(100% + 115px); /* Adjust the distance below the slider bar */
+    top: calc(100% + 10px); /* Adjust the distance below the slider bar */
     width: 100px;
     height: 30px; /* Adjust height as needed */
     cursor: pointer;
@@ -28,11 +28,12 @@
 
 /* Style for the "Next Year" button */
 #next-year {
-    right: -510px; /* Adjust the horizontal position of the "Next Year" button */
-	bottom: 30px;
+    right: -40px; /* Adjust the horizontal position of the "Next Year" button */
+	bottom: -20px;
 }
 
 /* Style for the "Previous Year" button */
 #prev-year {
-    left: 310px; /* Adjust the horizontal position of the "Previous Year" button */
+    left: 0px; /* Adjust the horizontal position of the "Previous Year" button */
+	bottom: 20px
 }
