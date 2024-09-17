@@ -9,21 +9,44 @@ var Jawg_Sunny = L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png
 	accessToken: 'erBSxDSb3MaX7nh0bMwyVhfS0OQCK9Ewh7zEWXsLoGiF8Y4WUFrGuXLW8CftYEms'
 }).addTo(map);
 
-// Define a custom control for the slider only (no buttons)
+// Define a custom control for the slider and buttons
 var SequenceControl = L.Control.extend({
     options: {
         position: 'topleft' // Position the control at the top left
     },
 
     onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+        // Add HTML elements for the slider and buttons with icons
+        container.innerHTML = '<input type="range" id="slider" min="2016" max="2023" value="2016" step="1" class="leaflet-bar-part leaflet-bar-part-single" />';
+
 
         // Prevent map panning when interacting with the control
         L.DomEvent.disableClickPropagation(container);
 
-        // Add event listener for the slider to update symbols on input change
+        // Add event listener for the slider
         container.querySelector('#slider').addEventListener('input', function() {
-            updateSymbols(); // Call your updateSymbols function when the slider moves
+            updateSymbols();
         });
+
+							// Add event listeners for the buttons
+			document.querySelector('#prev-year').addEventListener('click', function() {
+				var slider = document.querySelector('#slider');
+				if (parseInt(slider.value) > parseInt(slider.min)) {
+					slider.value = parseInt(slider.value) - 1;
+					updateSymbols();
+				}
+			});
+
+			document.querySelector('#next-year').addEventListener('click', function() {
+				var slider = document.querySelector('#slider');
+				if (parseInt(slider.value) < parseInt(slider.max)) {
+					slider.value = parseInt(slider.value) + 1;
+					updateSymbols();
+				}
+			});
+
 
         return container;
     }
@@ -236,7 +259,7 @@ function getColorRange(statistics) {
 
 
 
-		
+
 // Function to calculate the minimum value of the attribute
 function calcMinValue(data) {
     var minValues = [];
