@@ -138,44 +138,6 @@ function calculateLegendRadius(data, year) {
     return { min: minRadius, max: maxRadius, mean: meanRadius };
 }
 
-//Function to Create Legend
-//Extra Spacing so you know this is the one
-// Function to create the legend dynamically based on the selected year
-function createLegend(statistics) {
-    var LegendControl = L.Control.extend({
-        options: {
-            position: 'bottomleft'
-        },
-        onAdd: function () {
-            // Create the control container with a particular class name
-            var container = L.DomUtil.create('div', 'info legend');
-            // Define the SVG content for your legend
-            var svgContent = '<svg width="200" height="120">'; // Adjust width and height as needed
-            // Define the legend items
-            var legendItems = [
-                { label: 'Low: -18.35', color: '#b2182b', radius: 10, },
-                { label: 'Mean: -0.299', color: '#f7f7f7', radius: 20 },
-                { label: 'High: 4.03', color: '#2166ac', radius: 30 }
-            ];
-			// Add circles to SVG based on legend items
-			for (var i = 0; i < legendItems.length; i++) {
-				var item = legendItems[i];
-				svgContent += '<circle cx="50" cy="' + (20 + i * 30) + '" r="' + item.radius + '" fill="' + item.color + '" stroke="#000" stroke-width="2" opacity="0.7"></circle>';
-				svgContent += '<text x="85" y="' + (25 + i * 30) + '" fill="#000">' + item.label + '</text>'; // Adjusted x position
-			}
-			svgContent += '</svg>';
-            // Add the SVG content to the legend container
-            container.innerHTML = svgContent;
-            // Add any additional text or styling as needed
-            container.style.lineHeight = '20px'; // Adjust line height as needed
-            container.style.color = '#555'; // Adjust text color as needed
-            return container;
-        }
-    });
-    // Create an instance of the LegendControl and add it to the map
-    var legendControl = new LegendControl();
-    legendControl.addTo(map);
-}
 
 // Function to update proportional symbols based on selected year
 function updateSymbols() {
@@ -298,6 +260,45 @@ function createLegend(statistics) {
                 { label: 'Low: -18.35', color: '#b2182b', radius: 10, },
                 { label: 'Mean: -0.299', color: '#f7f7f7', radius: 20 },
                 { label: 'High: 8.136', color: '#2166ac', radius: 30 }
+            ];
+			// Add circles to SVG based on legend items
+			for (var i = 0; i < legendItems.length; i++) {
+				var item = legendItems[i];
+				svgContent += '<circle cx="50" cy="' + (20 + i * 30) + '" r="' + item.radius + '" fill="' + item.color + '" stroke="#000" stroke-width="2" opacity="0.7"></circle>';
+				svgContent += '<text x="85" y="' + (25 + i * 30) + '" fill="#000">' + item.label + '</text>'; // Adjusted x position
+			}
+			svgContent += '</svg>';
+            // Add the SVG content to the legend container
+            container.innerHTML = svgContent;
+            // Add any additional text or styling as needed
+            container.style.lineHeight = '20px'; // Adjust line height as needed
+            container.style.color = '#555'; // Adjust text color as needed
+            return container;
+        }
+    });
+    // Create an instance of the LegendControl and add it to the map
+    var legendControl = new LegendControl();
+    legendControl.addTo(map);
+}
+
+//Function to Create Legend
+//Extra Spacing so you know this is the one
+// Function to create the legend dynamically based on the selected year
+function createLegend(statistics) {
+    var LegendControl = L.Control.extend({
+        options: {
+            position: 'bottomleft'
+        },
+        onAdd: function () {
+            // Create the control container with a particular class name
+            var container = L.DomUtil.create('div', 'info legend');
+            // Define the SVG content for your legend
+            var svgContent = '<svg width="200" height="120">'; // Adjust width and height as needed
+            // Define the legend items
+            var legendItems = [
+                { label: 'Low: -18.35', color: '#b2182b', radius: 10, },
+                { label: 'Mean: -0.299', color: '#f7f7f7', radius: 20 },
+                { label: 'High: 4.03', color: '#2166ac', radius: 30 }
             ];
 			// Add circles to SVG based on legend items
 			for (var i = 0; i < legendItems.length; i++) {
